@@ -6,7 +6,7 @@
     <title>Caribbean Atlantic Holdings Ltd.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="../Assets/css/style.css" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -60,38 +60,104 @@
         <div class="container">
             <h2 class="section-title">Our Projects</h2>
             <div class="projects-grid">
-                <div class="project-card">
+                <div class="project-card" data-project="methanol">
                     <div class="project-img">
                         <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="Methanol Production">
                     </div>
                     <div class="project-info">
                         <h3>Methanol Production Plant</h3>
                         <p>State-of-the-art methanol production facility utilizing cutting-edge catalytic processes and eco-friendly practices.</p>
+                        <a href="#" class="btn project-details-btn" data-page="methanol-details">View Details</a>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="carbon-dioxide">
                     <div class="project-img">
                         <img src="https://images.unsplash.com/photo-1577017040065-650ee4d43339?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Gold Mine">
                     </div>
                     <div class="project-info">
-                        <h3>Obuasi Gold Mine Management</h3>
-                        <p>Successfully managed a gold mine in Obuasi, demonstrating expertise in mineral resource management.</p>
+                        <h3>Carbon Dioxide Processing Plant</h3>
+                        <p>...</p>
+                        <a href="#" class="btn project-details-btn" data-page="carbon-dioxide-details">View Details</a>
                     </div>
                 </div>
-                <div class="project-card">
+                <div class="project-card" data-project="waste-processing">
                     <div class="project-img">
                         <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Software Implementation">
                     </div>
                     <div class="project-info">
-                        <h3>Sonagas Accounting Software</h3>
-                        <p>Implemented accounting software for Equatorial Guinea's gas company, enhancing operational efficiency.</p>
+                        <h3>Waste Processing Plant</h3>
+                        <p>...</p>
+                        <a href="#" class="btn project-details-btn" data-page="waste-processing-details">View Details</a>
+                    </div>
+                </div>
+                    <div class="project-card">
+                    <div class="project-img" data-project="ammonia">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Software Implementation">
+                    </div>
+                    <div class="project-info">
+                        <h3>Ammonia Plant</h3>
+                        <p>...</p>
+                        <a href="#" class="btn project-details-btn" data-page="ammonia-details">View Details</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-        <!-- Methanol Production Plant Section -->
+    <!-- Methanol Production Plant Detail Section -->
+    <section id="methanol-details" class="page-section">
+        <div class="container">
+            <a href="#" class="back-btn" data-page="projects">&larr; Back to Projects</a>
+            
+            <div class="plant-hero">
+                <div class="container">
+                    <h1>Methanol Production Plant</h1>
+                    <p>West Africa's Premier Methanol Production Facility</p>
+                </div>
+            </div>
+            
+            <div class="plant-content">
+                <h2>About the Project</h2>
+                <p>Our state-of-the-art methanol production plant represents a significant step forward in West Africa's industrial capabilities. Utilizing cutting-edge catalytic processes, we prioritize eco-friendly practices and sustainable development.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Annual production capacity of 1,600,000 tons</li>
+                    <li>Utilizes natural gas from the Ghana Gas Processing facility</li>
+                    <li>Advanced catalytic conversion technology</li>
+                    <li>Carbon capture and recycling systems</li>
+                    <li>Zero wastewater discharge design</li>
+                </ul>
+                
+                <h3>Economic Impact</h3>
+                <p>Efficient local production facilities will lower import costs, enhance self-sufficiency, and stimulate economic growth in Ghana and West Africa. The plant is projected to create over 1,900 direct and indirect jobs, and significantly reduce regional reliance on methanol imports.</p>
+            </div>
+            
+            <div class="chart-container">
+                <h2>Production Metrics</h2>
+                <div class="chart-grid">
+                    <div class="chart-wrapper">
+                        <canvas id="productionChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h2>Environmental Impact</h2>
+                <div class="chart-grid">
+                    <div class="chart-wrapper">
+                        <canvas id="emissionsChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="sustainabilityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Contact Section -->
     <section id="contact" class="page-section">
@@ -103,7 +169,7 @@
                     <div class="contact-details">
                         <p><i class="fas fa-map-marker-alt"></i> 23 Aviation Road, Airport Residential Area, Accra, Ghana</p>
                         <p><i class="fas fa-phone"></i> +233-(0)50-732-2747</p>
-                        <p><i class="fas fa-envelope"></i> caribbeanatlanticholdings@gmail.com</p>
+                        <p><i class="fas fa-envelope"></i> info@cahl.com</p>
                     </div>
                     <div class="map">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3970.755816716072!2d-0.1678689256865532!3d5.605979433897869!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9c7d7ef594a5%3A0x5c00cec8f411e3a6!2sAirport%20Residential%20Area%2C%20Accra%2C%20Ghana!5e0!3m2!1sen!2sus!4v1684612345678!5m2!1sen!2sus" width="100%" height="250" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
