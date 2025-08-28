@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAHL - Caribbean Atlantic Holdings Ltd.</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffc107;
+        }
+
+        /* Page Sections */
+        .page {
+            display: none;
+            padding: 40px 0;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1516937941344-00b4e0337589?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #ffc107;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            background-color: #e0a800;
+            transform: translateY(-3px);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .project-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        /* Methanol Plant Detail Page */
+        .plant-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            margin-bottom: 40px;
+        }
+
+        .plant-content {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .chart-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #0056b3;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #003a75;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #003a75;
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            color: #ffc107;
+        }
+
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            margin-bottom: 10px;
+            display: block;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+                flex-direction: column;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .chart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="#" class="logo">CAHL</a>
+            <ul class="nav-links">
+                <li><a href="#" data-page="home">Home</a></li>
+                <li><a href="#" data-page="about">About</a></li>
+                <li><a href="#" data-page="projects">Projects</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1>CARIBBEAN ATLANTIC HOLDINGS LTD.</h1>
+                <p>Leading West Africa's Industrial Development through Sustainable Practices</p>
+                <a href="#" class="btn" data-page="projects">View Our Projects</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="about-content">
+                <h2>About Our Company</h2>
+                <p>Caribbean Atlantic Holdings Ghana Ltd. (CAHL) was established in 2004 following an invitation to President Kufour's inauguration, with a mission to support Ghana's industrial development by engaging the diaspora.</p>
+                <p>Under the leadership of CEO Salilan Gomez, CAHL aims to become West Africa's premier methanol producer, focusing on sustainability, community development, and operational excellence.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Page -->
+    <section id="projects" class="page">
+        <div class="container">
+            <h2>Our Projects</h2>
+            <p>CAHL has extensive experience in Ghana's gold and minerals industry and has represented firms in the oil and gas sector.</p>
+            
+            <div class="projects-grid">
+                <div class="project-card" data-project="methanol">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80" alt="Methanol Production Plant">
+                    </div>
+                    <div class="project-info">
+                        <h3>Methanol Production Plant</h3>
+                        <p>State-of-the-art methanol production facility utilizing cutting-edge catalytic processes and eco-friendly practices.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1577017040065-650ee4d43339?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Gold Mine">
+                    </div>
+                    <div class="project-info">
+                        <h3>Obuasi Gold Mine</h3>
+                        <p>Successfully managed a gold mine in Obuasi, demonstrating expertise in mineral resource management.</p>
+                    </div>
+                </div>
+                
+                <div class="project-card">
+                    <div class="project-img">
+                        <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Software Implementation">
+                    </div>
+                    <div class="project-info">
+                        <h3>Sonagas Accounting Software</h3>
+                        <p>Implemented accounting software for Equatorial Guinea's gas company, enhancing operational efficiency.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methanol Plant Detail Page -->
+    <section id="methanol-details" class="page">
+        <a href="#" class="back-btn" data-page="projects">&larr; Back to Projects</a>
+        
+        <div class="plant-hero">
+            <div class="container">
+                <h1>Methanol Production Plant</h1>
+                <p>West Africa's Premier Methanol Production Facility</p>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="plant-content">
+                <h2>About the Project</h2>
+                <p>Our state-of-the-art methanol production plant represents a significant step forward in West Africa's industrial capabilities. Utilizing cutting-edge catalytic processes, we prioritize eco-friendly practices and sustainable development.</p>
+                
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Annual production capacity of 500,000 tons</li>
+                    <li>Utilizes natural gas from the Ghana Gas Processing facility</li>
+                    <li>Advanced catalytic conversion technology</li>
+                    <li>Carbon capture and recycling systems</li>
+                    <li>Zero wastewater discharge design</li>
+                </ul>
+                
+                <h3>Economic Impact</h3>
+                <p>The plant is projected to create over 1,200 direct and indirect jobs, significantly reduce regional reliance on methanol imports, and contribute an estimated $350 million annually to the local economy.</p>
+            </div>
+            
+            <div class="chart-container">
+                <h2>Production Metrics</h2>
+                <div class="chart-grid">
+                    <div class="chart-wrapper">
+                        <canvas id="productionChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="revenueChart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <h2>Environmental Impact</h2>
+                <div class="chart-grid">
+                    <div class="chart-wrapper">
+                        <canvas id="emissionsChart"></canvas>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="sustainabilityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>23 Aviation Road, Airport Residential Area</p>
+                    <p>Accra, Ghana</p>
+                    <p>+233-(0)50-732-2747</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="#" data-page="home">Home</a>
+                    <a href="#" data-page="about">About</a>
+                    <a href="#" data-page="projects">Projects</a>
+                    <a href="#" data-page="contact">Contact</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Our Projects</h3>
+                    <a href="#" data-project="methanol">Methanol Production Plant</a>
+                    <a href="#">Obuasi Gold Mine</a>
+                    <a href="#">Sonagas Accounting Software</a>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Caribbean Atlantic Holdings Ltd. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page');
+            const navLinks = document.querySelectorAll('[data-page]');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            // Navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Hide all pages
+                    pages.forEach(page => {
+                        page.classList.remove('active');
+                    });
+                    
+                    // Show target page
+                    document.getElementById(targetPage).classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
+            
+            // Project cards
+            projectCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const project = this.getAttribute('data-project');
+                    
+                    if (project === 'methanol') {
+                        // Hide all pages
+                        pages.forEach(page => {
+                            page.classList.remove('active');
+                        });
+                        
+                        // Show methanol details page
+                        document.getElementById('methanol-details').classList.add('active');
+                        
+                        // Scroll to top
+                        window.scrollTo(0, 0);
+                        
+                        // Initialize charts
+                        initCharts();
+                    }
+                });
+            });
+            
+            // Initialize Charts for Methanol Page
+            function initCharts() {
+                // Production Chart
+                const productionCtx = document.getElementById('productionChart').getContext('2d');
+                new Chart(productionCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024', '2025', '2026', '2027'],
+                        datasets: [{
+                            label: 'Methanol Production (tons)',
+                            data: [0, 250000, 400000, 500000, 500000],
+                            borderColor: '#0056b3',
+                            backgroundColor: 'rgba(0, 86, 179, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Projected Production Growth'
+                            }
+                        }
+                    }
+                });
+                
+                // Revenue Chart
+                const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+                new Chart(revenueCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['2023', '2024', '2025', '2026', '2027'],
+                        datasets: [{
+                            label: 'Annual Revenue (USD millions)',
+                            data: [0, 150, 280, 350, 375],
+                            backgroundColor: '#ffc107'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Projected Revenue Growth'
+                            }
+                        }
+                    }
+                });
+                
+                // Emissions Chart
+                const emissionsCtx = document.getElementById('emissionsChart').getContext('2d');
+                new Chart(emissionsCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['CO2 Captured', 'CO2 Emitted'],
+                        datasets: [{
+                            data: [85, 15],
+                            backgroundColor: ['#28a745', '#dc3545']
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'CO2 Capture Efficiency'
+                            }
+                        }
+                    }
+                });
+                
+                // Sustainability Chart
+                const sustainabilityCtx = document.getElementById('sustainabilityChart').getContext('2d');
+                new Chart(sustainabilityCtx, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Energy Efficiency', 'Water Usage', 'Emissions', 'Waste Management', 'Community Impact'],
+                        datasets: [{
+                            label: 'Traditional Plants',
+                            data: [60, 40, 30, 50, 45],
+                            fill: true,
+                            backgroundColor: 'rgba(220, 53, 69, 0.2)',
+                            borderColor: 'rgb(220, 53, 69)',
+                            pointBackgroundColor: 'rgb(220, 53, 69)'
+                        }, {
+                            label: 'CAHL Plant',
+                            data: [90, 95, 85, 90, 95],
+                            fill: true,
+                            backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                            borderColor: 'rgb(40, 167, 69)',
+                            pointBackgroundColor: 'rgb(40, 167, 69)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Sustainability Comparison'
+                            }
+                        },
+                        scales: {
+                            r: {
+                                angleLines: {
+                                    display: true
+                                },
+                                suggestedMin: 0,
+                                suggestedMax: 100
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
