@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.getElementById('navLinks');
     const pageSections = document.querySelectorAll('.page-section');
     const navItems = document.querySelectorAll('a[data-page]');
-    const projectDetailsBtn = document.querySelector('.project-details-btn');
+    const projectDetailsBtn = document.querySelector('.project-details-btn:not(.upcoming-btn)');
     const backBtn = document.querySelector('.back-btn');
     
     // Mobile menu toggle
@@ -15,6 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Page navigation
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
+            // Prevent navigation for upcoming buttons
+            if (this.classList.contains('upcoming-btn')) {
+                e.preventDefault();
+                return;
+            }
+            
             e.preventDefault();
             const targetPage = this.getAttribute('data-page');
             

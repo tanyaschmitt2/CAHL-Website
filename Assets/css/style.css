@@ -62,6 +62,17 @@ p {
     transform: translateY(-3px);
 }
 
+.upcoming-btn {
+    background-color: var(--gray);
+    cursor: not-allowed;
+}
+
+.upcoming-btn:hover {
+    background-color: var(--gray);
+    transform: none;
+    cursor: not-allowed;
+}
+
 section {
     padding: 80px 0;
 }
@@ -210,8 +221,9 @@ header {
 /* Projects Section */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
+    justify-content: center;
 }
 
 .project-card {
@@ -220,6 +232,9 @@ header {
     overflow: hidden;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .project-card:hover {
@@ -245,6 +260,10 @@ header {
 
 .project-info {
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
 }
 
 .project-info h3 {
@@ -256,6 +275,7 @@ header {
     margin-top: 15px;
     padding: 8px 16px;
     font-size: 0.9rem;
+    align-self: flex-start;
 }
 
 /* Contact Section */
@@ -317,7 +337,6 @@ textarea.form-control {
 
 /* Methanol Plant Detail Page */
 .plant-hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1586773860418-d37222d8fce3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1173&q=80') no-repeat center center/cover;
     color: white;
     text-align: center;
     padding: 80px 0;
@@ -331,6 +350,24 @@ textarea.form-control {
     padding: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
+}
+
+/* Fix for Key Features indentation */
+.plant-content ul {
+    padding-left: 40px;
+    margin-bottom: var(--spacing);
+}
+
+.plant-content li {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.plant-content li::before {
+    content: "•";
+    position: absolute;
+    left: -20px;
+    color: var(--primary-color);
 }
 
 .chart-container {
@@ -493,6 +530,10 @@ footer {
     .hero p {
         font-size: 1.2rem;
     }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media (max-width: 768px) {
@@ -528,6 +569,10 @@ footer {
     .hero p {
         font-size: 1.1rem;
     }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 576px) {
@@ -541,5 +586,9 @@ footer {
     
     .plant-hero {
         padding: 60px 0;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
     }
 }
