@@ -12,6 +12,26 @@ document.addEventListener('DOMContentLoaded', function() {
         navLinks.classList.toggle('active');
     });
     
+// Home section specific adjustments
+function adjustHomeSection() {
+    const homeSection = document.getElementById('home');
+    if (homeSection && homeSection.classList.contains('active')) {
+        // Ensure home section has no padding
+        homeSection.style.padding = '0';
+        homeSection.style.margin = '0';
+    }
+}
+
+// Call this function when page loads and when navigating to home
+window.addEventListener('load', adjustHomeSection);
+
+// Also call it when navigating between pages
+document.querySelectorAll('a[data-page]').forEach(item => {
+    item.addEventListener('click', function() {
+        setTimeout(adjustHomeSection, 50);
+    });
+});
+
     // Page navigation
     navItems.forEach(item => {
         item.addEventListener('click', function(e) {
@@ -189,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         label: 'CAHL Plant',
                         data: [90, 95, 85, 90, 95],
                         fill: true,
-                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                        backgroundColor: 'rgable(40, 167, 69, 0.2)',
                         borderColor: 'rgb(40, 167, 69)',
                         pointBackgroundColor: 'rgb(40, 167, 69)'
                     }]

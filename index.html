@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caribbean Atlantic Holdings Ltd.</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="../Assets/css/style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <header>
         <div class="container header-container">
             <a href="#" data-page="home" class="logo">
-                <img src="../Assets/images/cahl_logo.png" alt="cahl logo" class="logo-img">
+                <img src="cahl_logo.png" alt="cahl logo" class="logo-img">
             </a>
             <button class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -28,7 +28,7 @@
     </header>
 
     <!-- Home Section -->
-    <section id="home" class="page-section active">
+    <section id="home" class="page-section active home-section">
         <div class="hero">
             <div class="hero-content">
                 <h1>CARIBBEAN ATLANTIC HOLDINGS LTD.</h1>
@@ -49,7 +49,7 @@
                     <p>Under the leadership of CEO Salilan Gomez, CAHL aims to become West Africa's premier methanol producer, focusing on sustainability, community development, and operational excellence.</p>
                 </div>
                 <div class="about-image">
-                    <img src="../Assets/images/about_us.jpeg"  alt="people at work">
+                    <img src="about_us.jpeg"  alt="people at work">
                 </div>
             </div>
         </div>
@@ -58,46 +58,54 @@
     <!-- Projects Section -->
     <section id="projects" class="page-section">
         <div class="container">
-            <h2 class="section-title">Our Projects</h2>
+            <h2 class="section-title centered-heading">Our Projects</h2>
             <div class="projects-grid">
                 <div class="project-card" data-project="methanol">
                     <div class="project-img">
-                        <img src="../Assets/images/methanol_plant.jpg" alt="Methanol Production">
+                        <img src="methanol_plant.jpg" alt="Methanol Production">
                     </div>
                     <div class="project-info">
-                        <h3>Methanol Production Plant</h3>
+                        <h3 class="centered-heading">Methanol Production Plant</h3>
                         <p>State-of-the-art methanol production facility utilising cutting-edge catalytic processes and eco-friendly practices.</p>
-                        <a href="#" class="btn project-details-btn" data-page="methanol-details">View Details</a>
+                        <div class="centered-button">
+                            <a href="#" class="btn project-details-btn" data-page="methanol-details">View Details</a>
+                        </div>
                     </div>
                 </div>
                 <div class="project-card" data-project="hydrogen">
                     <div class="project-img">
-                        <img src="../Assets/images/hydrogen_plant.jpg" alt="Hydrogen Processing Plant">
+                        <img src="hydrogen_plant.jpg" alt="Hydrogen Processing Plant">
                     </div>
                     <div class="project-info">
-                        <h3>Hydrogen Processing Plant</h3>
+                        <h3 class="centered-heading">Hydrogen Processing Plant</h3>
                         <p></p>
-                        <a href="#" class="btn project-details-btn upcoming-btn">Upcoming</a>
+                        <div class="centered-button">
+                            <a href="#" class="btn project-details-btn upcoming-btn">Upcoming</a>
+                        </div>
                     </div>
                 </div>
                 <div class="project-card" data-project="waste-processing">
                     <div class="project-img">
-                        <img src="../Assets/images/waste_to_energy_plant.jpg" alt="Waste-to-Energy Processing Plant">
+                        <img src="waste_to_energy_plant.jpg" alt="Waste-to-Energy Processing Plant">
                     </div>
                     <div class="project-info">
-                        <h3>Waste-to-Energy Processing Plant</h3>
+                        <h3 class="centered-heading">Waste-to-Energy Processing Plant</h3>
                         <p></p>
-                        <a href="#" class="btn project-details-btn upcoming-btn">Upcoming</a>
+                        <div class="centered-button">
+                            <a href="#" class="btn project-details-btn upcoming-btn">Upcoming</a>
+                        </div>
                     </div>
                 </div>
                     <div class="project-card">
                     <div class="project-img" data-project="ammonia">
-                        <img src="../Assets/images/ammonia_plant.jpg" alt="Ammonia Processing Plant">
+                        <img src="ammonia_plant.jpg" alt="Ammonia Processing Plant">
                     </div>
                     <div class="project-info">
-                        <h3>Ammonia Production Plant</h3>
+                        <h3 class="centered-heading">Ammonia Production Plant</h3>
                         <p></p>
-                        <a href="#" class="btn project-details-btn upcoming-btn">Upcoming</a>
+                        <div class="centered-button">
+                            <a href="#" class="btn project-details-btn upcoming-btn">Upcoming</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -109,7 +117,7 @@
         <div class="container">
             <a href="#" class="back-btn" data-page="projects">&larr; Back to Projects</a>
             
-            <div class="plant-hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('../Assets/images/methanol_plant.jpg') no-repeat center center/cover;">
+            <div class="plant-hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('methanol_plant.jpg') no-repeat center center/cover;">
                 <div class="container">
                     <h1>Methanol Production Plant</h1>
                     <p>West Africa's Premier Methanol Production Facility</p>
@@ -211,12 +219,12 @@
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#" data-page="home">Home</a></li>
-                        <li><a href="#" data-page="about">About</a></li>
-                        <li><a href="#" data-page="projects">Projects</a></li>
-                        <li><a href="#" data-page="contact">Contact</a></li>
-                    </ul>
+                    <div class="quick-links-row">
+                        <a href="#" data-page="home">Home</a>
+                        <a href="#" data-page="about">About</a>
+                        <a href="#" data-page="projects">Projects</a>
+                        <a href="#" data-page="contact">Contact</a>
+                    </div>
                 </div>
                 <div class="footer-social">
                     <h4>Follow Us</h4>
@@ -234,7 +242,7 @@
         </div>
     </footer>
 
-    <script src="../Assets/main.js"></script>
+    <script src="main.js"></script>
 
 </body>
 </html>
